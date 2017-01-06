@@ -2,6 +2,7 @@ package id.sch.smktelkom_mlg.learn.intent3;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,18 @@ public class MainActivity extends AppCompatActivity {
                 openWebPage("http://www.smktelkom-mlg.sch.id");
             }
         });
+        findViewById(R.id.imageViewCamera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                capturePhoto();
+            }
+        });
+    }
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private void capturePhoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
     private void openWebPage(String url) {
